@@ -1,0 +1,111 @@
+{% extends 'main/base.html' %}
+<!-- <!doctype html>
+<html lang="en">
+    <head>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style type="text/css"></style>
+        
+        <title>251project</title>
+
+    </head>
+
+<body> -->
+    {% block content %}
+    <div class="row">
+        <div class="col s12">
+          <div class="card">
+            <div class="card-image">
+              <img src="{{show.image}}" style="opacity: 0.5;">
+              <span class="card-title">
+                <h1 style="color: black;">{{show.title}}</h1>
+                <div>
+
+                    <span style="color: rgb(70, 67, 67);">Tomatometer - {{show.rating}} &nbsp; Metascore - {{show.m_rating}}</span>
+                </div>
+                <h5 style="color: rgb(20, 18, 18);">{{show.plot}}</h5>
+                {% for key,value in show.platform.items %}
+                <a class="waves-effect waves-light btn-large" href="{{key}}" >{{value}}</a>
+                {% endfor %}
+                
+                &nbsp;
+                &nbsp;
+                <a href="{% url "main:user_tvwishlist" show.id  %}" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+                &nbsp;
+                &nbsp;
+                <a href="{% url "main:user_tvfavlist" show.id  %}" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">favorite</i></a>
+                &nbsp;
+                &nbsp;
+                <a href="{% url "main:user_tvwatchedlist" show.id  %}" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">play_arrow</i></a>
+                <br>
+            
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h5>Cast and Crew</h5>
+        <div class="row">
+            {%for key, value in show.cast.items%}
+            <div class="col s4"><i class="large material-icons">account_circle</i><p>{{key}}</p><p style="color: darkgray;">{{value}}</p></div>
+            {%endfor%}
+          </div>
+
+      <h5>User reviews</h5>
+      <ul class="collection">
+          {% if show.meta_reviews %}
+             {% for key,value in show.meta_reviews.items %}
+             <li class="collection-item avatar">
+              <i class="material-icons circle">account_circle</i>
+              <span class="title"><b>Rating - {{key}}</b></span>
+                   <p>{{value}}</p>
+                   <p>source-metacritic</p>
+             </li>
+             {% endfor %}
+          {% else %}
+          <h5> No results </h5>
+          {% endif %}
+          
+        </ul>
+        
+
+    
+    <h3>Similar Shows</h3>
+    <div class="row">
+       {% if show.similar_shows.all %}
+        {% for x in show.similar_shows.all %}
+        <div class="col s2 m4">
+            <div class="card z-depth-3">
+             <div class="card-image">
+               <img class="activator" src="{{x.image}}">
+               <span class="card-title"><b>{{x.title}}</b></span>
+             </div>
+            <div class="card-content">
+              <p>
+               {% for key, value in x.cast.items %}
+                     {{key}}
+                   {% endfor %}
+              </p>
+             <span class="card-title activator grey-text text-darken-2">Ratings<i class="material-icons right">more_vert</i></span>
+           </div>
+           <div class="card-reveal">
+             <span class="card-title grey-text text-darken-4">{{x.title}}<i class="material-icons right">close</i></span>
+             <p>Rottentomatoes rating - {{x.rating}}</p>
+             <p>Metacritic rating - {{x.m_rating}}</p>
+           </div>
+           <div class="card-action">
+             <a href="/show/{{x.id}}">More Info</a>
+             
+           </div>
+        {% endfor %}
+        {% else %}
+      <h6>Not found at this moment</h6>
+      {% endif %}
+    </div>
+    </div>
+    </div>
+
+
+{% endblock %}

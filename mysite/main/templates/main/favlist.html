@@ -1,0 +1,115 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div>
+  <h1 class="h3">Your fav list</h1>
+  <div>Manage your fav list</div>
+  <hr />
+</div>
+<style type="text/css">
+  
+  .card-content{
+    height: 100px;
+    overflow-y: scroll;
+  overflow-x: hidden;
+  }
+  .card-image {
+    cursor: pointer;
+    height: 200px;
+  overflow-y: hidden;
+    transition: all .3s ease;
+  }
+  .card-title{
+    display: none;
+    color: black;
+  }
+  
+  .card:hover {
+    border: 3px solid var(--primary-color);
+    opacity: 2;
+    transform: scale(1.08);
+  }
+  
+  .card-image:hover .card-title {
+    display: block;
+  }
+  
+  
+  
+  
+  </style>
+<h5>Movies</h5>
+<div class="row">
+{% if favlist %}
+{% for m in favlist %}
+    <div class="col s2 m4">
+      <div class="card z-depth-5">
+       <div class="card-image">
+         <img class="activator" src="{{m.image}}">
+         <span class="card-title"><b>{{m.title}}</b></span>
+       </div>
+       <div class="card-content">
+         <p>
+           {% for key, value in m.cast.items %}
+                 {{key}}
+               {% endfor %}
+         </p>
+         <span class="card-title activator grey-text text-darken-2">Ratings<i class="material-icons right">more_vert</i></span>
+       </div>
+       <div class="card-reveal">
+         <span class="card-title grey-text text-darken-4">{{m.title}}<i class="material-icons right">close</i></span>
+         <p>Rottentomatoes rating - {{m.rating}}</p>
+         <p>Metacritic rating - {{m.m_rating}}</p>
+         <p>Release Year - {{m.year}}</p>
+       </div>
+       <div class="card-action">
+         <p><a href="/movie/{{m.id}}">More Info</a></p>
+         <p><a href="{% url 'main:user_favlist' m.id %}">Remove from Favlist</a></p>
+       </div>
+     </div>
+    </div>
+    
+  
+{% endfor %}
+</div>
+{% else %}
+<p class="card-text">No movies have been added to your fav list yet</p>
+{% endif %}
+<h5>TV Shows</h5>
+<div class="row">
+{% if tfavlist %}
+{% for m in tfavlist %}
+    
+    <div class="col s2 m4">
+      <div class="card z-depth-5">
+       <div class="card-image">
+         <img class="activator" src="{{m.image}}">
+         <span class="card-title"><b>{{m.title}}</b></span>
+       </div>
+       <div class="card-content">
+         <p>
+           {% for key, value in m.cast.items %}
+                 {{key}}
+               {% endfor %}
+         </p>
+         <span class="card-title activator grey-text text-darken-2">Ratings<i class="material-icons right">more_vert</i></span>
+       </div>
+       <div class="card-reveal">
+         <span class="card-title grey-text text-darken-4">{{m.title}}<i class="material-icons right">close</i></span>
+         <p>Rottentomatoes rating - {{m.rating}}</p>
+         <p>Metacritic rating - {{m.m_rating}}</p>
+       </div>
+       <div class="card-action">
+         <p><a href="/show/{{m.id}}">More Info</a></p>
+         <p><a href="{% url 'main:user_tvfavlist' m.id %}">Remove from Favlist</a></p>
+       </div>
+     </div>
+    </div>
+    
+  
+{% endfor %}
+{% else %}
+<p class="card-text">No tv shows have been added to your Favlist yet</p>
+{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,199 @@
+{% extends 'main/prac.html' %}
+
+{% block content %}
+
+<h6 style='text-align: center'>Search results for {{searched | upper }}</h6>
+ <style type="text/css">
+  
+.card-content{
+  height: 100px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.card-image {
+  cursor: pointer;
+  height: 200px;
+  overflow-y: hidden;
+  transition: all .05s ease;
+}
+.card-title{
+  display: none;
+  color: black;
+}
+
+.card:hover {
+  border: 3px solid var(--primary-color);
+  opacity: 2;
+  transform: scale(1.08);
+  
+}
+
+.card-image:hover .card-title {
+  display: block;
+}
+
+
+
+
+</style>
+<!-- <div class="card-group"> -->
+
+  <!-- <div class="row">
+    <div class="col s12 m7">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{m.image}}">
+          <span class="card-title">{{m.title}}</span>
+        </div>
+        <div class="card-content">
+          <h6 class="card-subtitle mb-2 text-muted">Rottentomatoes rating - {{m.rating}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Metacritic rating - {{m.m_rating}}</h6>
+          <p>
+            {% for key, value in m.cast.items %}
+                  {{key}}
+                {% endfor %}
+          </p>
+        </div>
+        <div class="card-action">
+          <a href="/movie/{{m.id}}">This is a link</a>
+        </div>
+      </div>
+    </div>
+  </div> -->
+            
+
+
+
+
+
+
+
+
+<h5>Movies</h5>
+<div class="row">
+    
+{% for m in movie_obj %}
+  <div class="col s2 m4">
+   <div class="card z-depth-5">
+    <div class="card-image">
+      <img class="activator" src="{{m.image}}">
+      <span class="card-title"><b>{{m.title}}</b></span>
+    </div>
+    <div class="card-content">
+      <p>
+        {% for key, value in m.cast.items %}
+              {{key}}
+            {% endfor %}
+      </p>
+      <span class="card-title activator grey-text text-darken-2">Ratings<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">{{m.title}}<i class="material-icons right">close</i></span>
+      <p>Rottentomatoes rating - {{m.rating}}</p>
+      <p>Metacritic rating - {{m.m_rating}}</p>
+      <p>Release Year - {{m.year}}</p>
+    </div>
+    <div class="card-action">
+      <a href="/movie/{{m.id}}">More Info</a>
+      
+    </div>
+  </div>
+ </div>
+
+
+
+
+
+    <!-- <div class="col-sm-6">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{m.image}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{m.title}} </h5>
+              <h6 class="card-subtitle mb-2 text-muted">Rottentomatoes rating - {{m.rating}}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">Metacritic rating - {{m.m_rating}}</h6>
+              <p class="card-text">
+                {% for key, value in m.cast.items %}
+                  {{key}}
+                {% endfor %}
+              </p>
+              <a href="/movie/{{m.id}}" class="btn btn-primary">{{m.year}}</a>
+            </div>
+        </div>
+    </div> -->
+    
+        <!-- <div class="card" style="width: 100rem;"> 
+          <img class="card-img-top" src="{{m.3}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{m.0}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Rating - {{m.4}}</h6>
+            <p class="card-text">{{m.2}}</p>
+            <a href="{{m.1}}" class="btn btn-primary">{{m.5}}</a>
+          </div>
+        </div> -->
+  
+        {% endfor %}  
+</div> 
+<h5>TV Shows</h5>
+<div class="row">
+{% if show_obj %}
+{% for s in show_obj %}
+   <div class="col s2 m4">
+    <div class="card z-depth-3">
+     <div class="card-image">
+       <img class="activator" src="{{s.image}}">
+       <span class="card-title"><b>{{s.title}}</b></span>
+     </div>
+    <div class="card-content">
+      <p>
+       {% for key, value in s.cast.items %}
+             {{key}}
+           {% endfor %}
+      </p>
+     <span class="card-title activator grey-text text-darken-2">Ratings<i class="material-icons right">more_vert</i></span>
+   </div>
+   <div class="card-reveal">
+     <span class="card-title grey-text text-darken-4">{{s.title}}<i class="material-icons right">close</i></span>
+     <p>Rottentomatoes rating - {{s.rating}}</p>
+     <p>Metacritic rating - {{s.m_rating}}</p>
+   </div>
+   <div class="card-action">
+     <a href="/show/{{s.id}}">More Info</a>
+     
+   </div>
+ </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 
+    <div class="col-sm-6">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{s.image}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{s.title}} </h5>
+              <h6 class="card-subtitle mb-2 text-muted">Rottentomatoes rating - {{s.rating}}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">Metacritic rating - {{s.m_rating}}</h6>
+              <p class="card-text">
+                {% for key, value in m.cast.items %}
+                  {{key}}
+                {% endfor %}
+              </p>
+              <a href="/show/{{s.id}}" class="btn btn-primary">More Info</a>
+            </div>
+        </div>
+    </div> -->
+    {% endfor %}
+
+</div>
+{% else %}
+<p class="card-text">No search reuslts for TV Shows</p>
+{% endif %}
+
+
+{% endblock %}

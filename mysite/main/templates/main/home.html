@@ -1,0 +1,53 @@
+{% extends 'main/prac.html' %}
+{% block content %}
+<style type="text/css">
+  
+  .card-content{
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  
+}
+
+
+.card:hover {
+  opacity: 2;
+  transform: scale(1.08);
+  
+}
+
+   
+   
+   
+   </style>
+<h3>Romance Movies</h3>
+<div class="row">
+   {% for movie in x %}
+   <div class="col s2 m4">
+      <div class="card z-depth-5">
+       
+       <div class="card-content">
+         <h5>{{movie.title}}</h5>
+         <p>{{movie.plot}}</p>
+         <!-- <p>
+           {% for key, value in movie.cast.items %}
+                 {{key}}
+               {% endfor %}
+         </p> -->
+         <span class="card-title activator grey-text text-darken-2">Ratings<i class="material-icons right">more_vert</i></span>
+       </div>
+       <div class="card-reveal">
+         <span class="card-title grey-text text-darken-4">{{movie.title}}<i class="material-icons right">close</i></span>
+         <p>IMDB rating - {{movie.rating}}</p>
+         <p>Metacritic rating - {{movie.meta_rating}}</p>
+         <p>Release Year - {{movie.year}}</p>
+       </div>
+       <div class="card-action">
+         <a href="/romancemovie/{{movie.id}}">More Info</a>
+         
+       </div>
+     </div>
+    </div>
+   {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div>
+  <h1 class="h3">Your watched list</h1>
+  <div>Manage your watched list</div>
+  <hr />
+</div>
+<style type="text/css">
+  
+  .card-content{
+    height: 100px;
+    overflow-y: scroll;
+  overflow-x: hidden;
+  }
+  .card-image {
+    cursor: pointer;
+    height: 200px;
+  overflow-y: hidden;
+    transition: all .3s ease;
+  }
+  .card-title{
+    display: none;
+    color: black;
+  }
+  
+  .card:hover {
+    border: 3px solid var(--primary-color);
+    opacity: 2;
+    transform: scale(1.08);
+  }
+  
+  .card-image:hover .card-title {
+    display: block;
+  }
+  
+  
+  
+  
+  </style>
+<h5>Movies</h5>
+  <div class="row">
+{% if watchedlist %}
+{% for m in watchedlist %}
+   
+
+
+
+
+    <div class="col s2 m4">
+      <div class="card z-depth-5">
+       <div class="card-image">
+         <img class="activator" src="{{m.image}}">
+         <span class="card-title"><b>{{m.title}}</b></span>
+       </div>
+       <div class="card-content">
+         <p>
+           {% for key, value in m.cast.items %}
+                 {{key}}
+               {% endfor %}
+         </p>
+         <span class="card-title activator grey-text text-darken-2">Ratings<i class="material-icons right">more_vert</i></span>
+       </div>
+       <div class="card-reveal">
+         <span class="card-title grey-text text-darken-4">{{m.title}}<i class="material-icons right">close</i></span>
+         <p>Rottentomatoes rating - {{m.rating}}</p>
+         <p>Metacritic rating - {{m.m_rating}}</p>
+         <p>Release Year - {{m.year}}</p>
+       </div>
+       <div class="card-action">
+         <p><a href="/movie/{{m.id}}">More Info</a></p>
+         <p><a href="{% url 'main:user_watchedlist' m.id %}">Remove from Watchedlist</a></p>
+       </div>
+     </div>
+    </div>
+  
+{% endfor %}
+  </div>
+{% else %}
+<p class="card-text">No movies have been added to your watched list yet</p>
+{% endif %}
+<h5>TV Shows</h5>
+<div class="row">
+{% if twatchedlist %}
+{% for m in twatchedlist %}
+    
+
+
+    <div class="col s2 m4">
+      <div class="card z-depth-5">
+       <div class="card-image">
+         <img class="activator" src="{{m.image}}">
+         <span class="card-title"><b>{{m.title}}</b></span>
+       </div>
+       <div class="card-content">
+         <p>
+           {% for key, value in m.cast.items %}
+                 {{key}}
+               {% endfor %}
+         </p>
+         <span class="card-title activator grey-text text-darken-2">Ratings<i class="material-icons right">more_vert</i></span>
+       </div>
+       <div class="card-reveal">
+         <span class="card-title grey-text text-darken-4">{{m.title}}<i class="material-icons right">close</i></span>
+         <p>Rottentomatoes rating - {{m.rating}}</p>
+         <p>Metacritic rating - {{m.m_rating}}</p>
+       </div>
+       <div class="card-action">
+         <p></p><a href="/show/{{m.id}}">More Info</a></p>
+         <p><a href="{% url 'main:user_tvwatchedlist' m.id %}">Remove from Watchedlist</a></p>
+       </div>
+     </div>
+    </div>
+    
+  
+{% endfor %}
+</div>
+{% else %}
+<p class="card-text">No tv shows have been added to your watchedlist yet</p>
+{% endif %}
+
+{% endblock %}

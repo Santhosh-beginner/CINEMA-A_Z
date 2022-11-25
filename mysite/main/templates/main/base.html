@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <!-- <style type="text/css">
+            .sidenav{
+                height: 100%;
+                width: 160px;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: black;
+                overflow-x: hidden;
+                padding-top: 20px;
+            }
+            .sidenav a{
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 15px;
+                color: azure;
+                display: block;
+            }
+            .sidenav a:hover{
+                color: aqua;
+            }
+            .main{
+                margin-left: 160px;
+                padding: 0px 10px;
+            }
+
+        </style> -->
+        <style type="text/css">
+            .nav-wrapper{
+                background-color: rgb(53, 46, 97);
+            }
+           
+        </style>
+        <title>251project</title>
+    </head>
+    <body>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+        <nav>
+            <div class="nav-wrapper">
+              <a href="/home" class="brand-logo">Home</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/wishlist">To watch</a></li>
+                <li><a href="/favlist">Favorites</a></li>
+                <li><a href="/watchedlist">Watched</a></li>
+                <li><a href="/logout">Logout</a></li>
+              </ul>
+            </div>
+          </nav>
+          <div class="container">
+          
+                    {% block content %}
+                    <p> BASE HTML </p>
+                    {% endblock %}
+                </div>
+               
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+    </body>
+</html>

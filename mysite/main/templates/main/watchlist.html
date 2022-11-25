@@ -1,0 +1,139 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div>
+  <h1 class="h3">My Wishlist</h1>
+  <div>Manage your Wishlist</div>
+  <hr />
+</div>
+<style type="text/css">
+  
+  .card-content{
+    height: 100px;
+    overflow-y: scroll;
+  overflow-x: hidden;
+  }
+  .card-image {
+    cursor: pointer;
+    height: 200px;
+  overflow-y: hidden;
+    transition: all .3s ease;
+  }
+  .card-title{
+    display: none;
+    color: black;
+  }
+  
+  .card:hover {
+    border: 3px solid var(--primary-color);
+    opacity: 2;
+    transform: scale(1.08);
+  }
+  
+  .card-image:hover .card-title {
+    display: block;
+  }
+  
+  
+  
+  
+  </style>
+<h5>Movies</h5>
+<div class="row">
+{% if mwishlist %}
+{% for m in mwishlist %}
+    <div class="col s2 m4">
+      <div class="card z-depth-5">
+       <div class="card-image">
+         <img class="activator" src="{{m.image}}">
+         <span class="card-title"><b>{{m.title}}</b></span>
+       </div>
+       <div class="card-content">
+         <p>
+           {% for key, value in m.cast.items %}
+                 {{key}}
+               {% endfor %}
+         </p>
+         <span class="card-title activator grey-text text-darken-2">Ratings<i class="material-icons right">more_vert</i></span>
+       </div>
+       <div class="card-reveal">
+         <span class="card-title grey-text text-darken-4">{{m.title}}<i class="material-icons right">close</i></span>
+         <p>Rottentomatoes rating - {{m.rating}}</p>
+         <p>Metacritic rating - {{m.m_rating}}</p>
+         <p>Release Year - {{m.year}}</p>
+       </div>
+       <div class="card-action">
+         <p><a href="/movie/{{m.id}}">More Info</a></p>
+         <p><a href="{% url 'main:user_wishlist' m.id %}">Remove from Wishlist</a></p>
+       </div>
+     </div>
+    </div>
+    
+  
+{% endfor %}
+</div>
+{% else %}
+<p class="card-text">No movies have been added to your wishlist yet</p>
+{% endif %}
+<h5>TV Shows</h5>
+<div class="row">
+{% if twishlist %}
+{% for m in twishlist %}
+    <!-- <div class="col-sm-6">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{m.image}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{m.title}} </h5>
+              <h6 class="card-subtitle mb-2 text-muted">Rating - {{m.rating}}</h6>
+              <p class="card-text">
+                {% for key, value in m.cast.items %}
+                  {{key}}
+                {% endfor %}
+              </p>
+              <a href="/show/{{m.id}}" class="btn btn-primary">More Info</a>
+              <a type="button" class="btn btn-primary fw500 btn-sm" href="{% url 'main:user_tvwishlist' m.id %}">Remove from Wishlist</a>
+            </div>
+        </div>
+    </div> -->
+    
+  
+    <div class="col s2 m4">
+      <div class="card z-depth-5">
+       <div class="card-image">
+         <img class="activator" src="{{m.image}}">
+         <span class="card-title"><b>{{m.title}}</b></span>
+       </div>
+       <div class="card-content">
+         <p>
+           {% for key, value in m.cast.items %}
+                 {{key}}
+               {% endfor %}
+         </p>
+         <span class="card-title activator grey-text text-darken-2">Ratings<i class="material-icons right">more_vert</i></span>
+       </div>
+       <div class="card-reveal">
+         <span class="card-title grey-text text-darken-4">{{m.title}}<i class="material-icons right">close</i></span>
+         <p>Rottentomatoes rating - {{m.rating}}</p>
+         <p>Metacritic rating - {{m.m_rating}}</p>
+       </div>
+       <div class="card-action">
+         <a href="/show/{{m.id}}">More Info</a>
+         <a href="{% url 'main:user_tvwishlist' m.id %}">Remove from Wishlist</a>
+       </div>
+     </div>
+    </div>
+
+
+
+
+
+
+
+{% endfor %}
+</div>
+{% else %}
+<p class="card-text">No tv shows have been added to your wishlist yet</p>
+{% endif %}
+
+
+{% endblock %}
